@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RandomCat</string>
+    <string name="retry">Retry</string>
+    <string name="cat_error">An error occurred while loading the cat :(</string>
 </resources>
