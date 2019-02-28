@@ -20,26 +20,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by contentView(R.layout.activity_main)
-    private lateinit var viewModel: CatViewModel
+    private val viewModel: CatViewModel by lazy {
+        ViewModelProviders.of(this).get(CatViewModel::class.java)
+    }
     private var errorSnackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CatViewModel::class.java)
-        binding.viewModel = viewModel
+
+        setupViewModel()
 
         val mp: MediaPlayer = MediaPlayer.create(this, R.raw.gato_mia)
-
-        viewModel.errorMessage.observe(this, Observer { errorMessage ->
-            errorMessage?.let {
-                showError(errorMessage)
-            } ?: hideError()
-        })
-
-        viewModel.loadingCat.observe(this, Observer { cat ->
-            binding.cat = cat
-        })
-
         btnNewCat.setOnClickListener {
             viewModel.loadRandomCat()
             mp.start()
@@ -49,6 +40,19 @@ class MainActivity : AppCompatActivity() {
         btnSharedCat.setOnClickListener {
             checkPermission()
         }
+    }
+
+    private fun setupViewModel() {
+        binding.viewModel = viewModel
+        viewModel.errorMessage.observe(this, Observer { errorMessage ->
+            errorMessage?.let {
+                showError(errorMessage)
+            } ?: hideError()
+        })
+
+        viewModel.loadingCat.observe(this, Observer { cat ->
+            binding.cat = cat
+        })
     }
 
     private fun checkPermission() {
