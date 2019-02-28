@@ -15,7 +15,6 @@ class CatViewModel : BaseViewModel() {
 
     @Inject
     lateinit var catApi: CatApi
-
     private lateinit var subscription: Disposable
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
