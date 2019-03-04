@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 	
 	<data>
@@ -15,18 +16,20 @@
 	
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:background="@drawable/background">
 		
-		<ImageButton
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:id="@+id/btnSharedCat"
-			android:layout_width="32dp"
-			android:layout_height="32dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
 			android:layout_marginEnd="16dp"
 			android:layout_marginRight="16dp"
 			android:layout_marginBottom="8dp"
-			android:background="@null"
 			android:src="@drawable/ic_share"
+			app:backgroundTint="@android:color/darker_gray"
+			app:elevation="4dp"
 			app:layout_constraintBottom_toTopOf="@+id/ivCat"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
@@ -57,12 +60,54 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dp"
 			android:layout_marginBottom="32dp"
-			android:text="Novo Gato"
+			android:text="@string/novo_gato"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/ivCat" />
-	
+		
+		<ImageView
+			android:id="@+id/ivError"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:src="@drawable/cat_error"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+		
+		<TextView
+			android:id="@+id/tvError"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_marginLeft="8dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginRight="8dp"
+			android:text="@string/not_connection"
+			android:textColor="@android:color/black"
+			android:textSize="24sp"
+			android:textStyle="bold"
+			app:layout_constraintBottom_toBottomOf="@id/ivError"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/ivError"
+			app:layout_constraintVertical_bias="0.13999999" />
+		
+		<androidx.constraintlayout.widget.Group
+			android:id="@+id/errorGroup"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:visibility="gone"
+			app:constraint_referenced_ids="tvError,ivError" />
+		
+		<androidx.constraintlayout.widget.Group
+			android:id="@+id/successGroup"
+			android:visibility="gone"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:constraint_referenced_ids="btnSharedCat,btnNewCat,ivCat" />
 	
 	</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
