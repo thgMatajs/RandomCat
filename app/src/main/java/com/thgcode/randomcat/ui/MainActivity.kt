@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
 
         setupViewModel()
         FirebasePerformance.getInstance().newTrace("my_trace").start()
@@ -94,17 +95,15 @@ class MainActivity : AppCompatActivity() {
     private fun checkingConnection() {
         connectionLiveData.observe(this, Observer<ConnectionModel> {
             if (it.isConnected) {
-                when (it.type) {
-                    ConnectivityManager.TYPE_WIFI -> managerVisibility(true)
-                    ConnectivityManager.TYPE_MOBILE -> managerVisibility(true)
-                }
-            } else managerVisibility(false)
+                if (it.type == ConnectivityManager.TYPE_WIFI || it.type == ConnectivityManager.TYPE_MOBILE)
+                    managerVisibility(it.isConnected)
+            } else
+                managerVisibility(it.isConnected)
         })
     }
 
-    private fun managerVisibility(isVisible: Boolean) {
-
-        if (isVisible) {
+    private fun managerVisibility(isConnected: Boolean) {
+        if (isConnected) {
             successGroup.visibility = View.VISIBLE
             errorGroup.visibility = View.GONE
         } else {
