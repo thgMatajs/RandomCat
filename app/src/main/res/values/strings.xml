@@ -2,4 +2,6 @@
     <string name="app_name">RandomCat</string>
     <string name="retry">Retry</string>
     <string name="cat_error">An error occurred while loading the cat :(</string>
+    <string name="not_connection">Que pena, Você está sem conexão :(</string>
+	<string name="novo_gato">Novo Gato</string>
 </resources>
