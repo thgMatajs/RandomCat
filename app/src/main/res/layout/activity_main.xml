@@ -4,7 +4,6 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 	
 	<data>
-		
 		<variable
 			name="viewModel"
 			type="com.thgcode.randomcat.ui.CatViewModel" />
@@ -16,8 +15,7 @@
 	
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="@drawable/background">
+		android:layout_height="match_parent">
 		
 		<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:id="@+id/btnSharedCat"
@@ -81,19 +79,20 @@
 			android:id="@+id/tvError"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="8dp"
-			android:layout_marginLeft="8dp"
-			android:layout_marginEnd="8dp"
-			android:layout_marginRight="8dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginLeft="16dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginRight="16dp"
 			android:text="@string/not_connection"
+			android:textAlignment="center"
 			android:textColor="@android:color/black"
 			android:textSize="24sp"
 			android:textStyle="bold"
-			app:layout_constraintBottom_toBottomOf="@id/ivError"
+			app:layout_constraintBottom_toBottomOf="@+id/ivError"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="@id/ivError"
-			app:layout_constraintVertical_bias="0.13999999" />
+			app:layout_constraintTop_toTopOf="@+id/ivError"
+			app:layout_constraintVertical_bias="1.0" />
 		
 		<androidx.constraintlayout.widget.Group
 			android:id="@+id/errorGroup"
