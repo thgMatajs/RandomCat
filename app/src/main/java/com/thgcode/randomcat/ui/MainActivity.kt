@@ -11,8 +11,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.perf.FirebasePerformance
 import com.thgcode.randomcat.R
 import com.thgcode.randomcat.databinding.ActivityMainBinding
 import com.thgcode.randomcat.model.ConnectionModel
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
 
         setupViewModel()
-        FirebasePerformance.getInstance().newTrace("my_trace").start()
+        setupAdMob()
 
         val mp: MediaPlayer = MediaPlayer.create(this, R.raw.gato_mia)
         btnNewCat.setOnClickListener {
@@ -52,6 +54,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkingConnection()
+    }
+
+    private fun setupAdMob() {
+        MobileAds.initialize(this, "ca-app-pub-5021501566141607~9314005556")
+        val myAdView = findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        myAdView.loadAd(adRequest)
     }
 
     private fun setupViewModel() {
@@ -88,9 +97,7 @@ class MainActivity : AppCompatActivity() {
         errorSnackbar?.show()
     }
 
-    private fun hideError() {
-        errorSnackbar?.dismiss()
-    }
+    private fun hideError() = errorSnackbar?.dismiss()
 
     private fun checkingConnection() {
         connectionLiveData.observe(this, Observer<ConnectionModel> {
