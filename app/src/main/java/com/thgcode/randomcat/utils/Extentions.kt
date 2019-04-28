@@ -2,7 +2,6 @@ package com.thgcode.randomcat.utils
 
 import android.app.Activity
 import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -11,7 +10,6 @@ import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import kotlinx.android.synthetic.main.activity_main.*
 import java.io.ByteArrayOutputStream
 import kotlin.reflect.KProperty
 
