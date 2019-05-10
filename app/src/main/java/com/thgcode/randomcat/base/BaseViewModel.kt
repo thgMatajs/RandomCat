@@ -6,7 +6,7 @@ import com.thgcode.randomcat.injection.component.ViewModelInjector
 import com.thgcode.randomcat.injection.module.NetworkModule
 import com.thgcode.randomcat.ui.CatViewModel
 
-abstract class BaseViewModel : ViewModel(){
+abstract class BaseViewModel : ViewModel() {
 
     val injector: ViewModelInjector = DaggerViewModelInjector
         .builder()
