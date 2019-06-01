@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">RandomCat</string>
-    <string name="retry">Retry</string>
+    <string name="app_name">CuteCats</string>
+    <string name="retry">Recarregar</string>
     <string name="cat_error">Ocorreu um erro ao carregar o gato :(</string>
     <string name="not_connection">Que pena, Você está sem conexão :(</string>
 	<string name="novo_gato">Novo Gato</string>

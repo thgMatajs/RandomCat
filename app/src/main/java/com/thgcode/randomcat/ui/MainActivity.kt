@@ -15,6 +15,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.thgcode.randomcat.R
 import com.thgcode.randomcat.databinding.ActivityMainBinding
 import com.thgcode.randomcat.model.ConnectionModel
@@ -34,6 +35,9 @@ class MainActivity : AppCompatActivity() {
     private val connectionLiveData: ConnectionLiveData by lazy {
         ConnectionLiveData(this)
     }
+    private val firebaseAnalytics: FirebaseAnalytics by lazy {
+        FirebaseAnalytics.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +51,12 @@ class MainActivity : AppCompatActivity() {
             viewModel.loadRandomCat()
             mp.start()
             ivCat.isDrawingCacheEnabled = false
+            sendEvent("btnNewCat")
         }
 
         btnSharedCat.setOnClickListener {
             checkPermission()
+            sendEvent("btnSharedCat")
         }
 
         checkingConnection()
@@ -92,8 +98,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showError(@StringRes errorMessage: Int) {
-        errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
-        errorSnackbar?.setAction(com.thgcode.randomcat.R.string.retry, viewModel.clickListener)
+        errorSnackbar = Snackbar.make(btnSharedCat, errorMessage, Snackbar.LENGTH_INDEFINITE)
+        errorSnackbar?.setAction(R.string.retry, viewModel.clickListener)
         errorSnackbar?.show()
     }
 
@@ -117,5 +123,11 @@ class MainActivity : AppCompatActivity() {
             successGroup.visibility = View.GONE
             errorGroup.visibility = View.VISIBLE
         }
+    }
+
+    private fun sendEvent(itemName: String) {
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, itemName)
+        firebaseAnalytics.logEvent("btn_clicked_$itemName", bundle)
     }
 }
